@@ -17,6 +17,24 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 let marcador = null
 
+// mensagem de que o mapa não carrega offline
+const mapaOffline = document.getElementById("mapaOffline")
+
+function verificarConexao() {
+  if (navigator.onLine) {
+    mapaOffline.style.display = "none" 
+    mapa.getContainer().style.display = "block" 
+  } else {
+    mapaOffline.style.display = "block" 
+    mapa.getContainer().style.display = "none" 
+  }
+}
+
+verificarConexao()
+
+window.addEventListener("online", verificarConexao)
+window.addEventListener("offline", verificarConexao)
+
 
 btnLocalizacao.addEventListener("click", () => {
   if (!navigator.geolocation) {
