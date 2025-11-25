@@ -1,58 +1,116 @@
-import { salvarHumor, listarHumores, removerHumor } from './db.js'
+const btnSalvar = document.getElementById("salvar")
+const btnLocalizacao = document.getElementById("localizacao")
+const nota = document.getElementById("nota")
+const humorSelect = document.getElementById("humor")
+const registros = document.getElementById("registros")
 
-let lat = null
-let lng = null
-let map
+let latitude = null
+let longitude = null
 
-document.getElementById('localizacao').onclick = () => {
-  navigator.geolocation.getCurrentPosition(pos => {
-    lat = pos.coords.latitude
-    lng = pos.coords.longitude
 
-    map = L.map('mapa').setView([lat, lng], 15)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-      .addTo(map)
+const mapa = L.map("mapa").setView([-23.5, -46.6], 4)
 
-    L.marker([lat, lng]).addTo(map)
-      .bindPopup('Você estava aqui')
-      .openPopup()
-  })
-}
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "© OpenStreetMap"
+}).addTo(mapa)
 
-document.getElementById('salvar').onclick = async () => {
-  const emoji = document.getElementById('emoji').value
-  const nota = document.getElementById('nota').value
-  const data = new Date().toLocaleDateString()
+let marcador = null
 
-  await salvarHumor({ emoji, nota, data, lat, lng })
 
-  carregar()
-}
+btnLocalizacao.addEventListener("click", () => {
+  if (!navigator.geolocation) {
+    alert("Seu navegador não suporta GPS")
+    return
+  }
 
-async function carregar() {
-  const lista = document.getElementById('lista')
-  lista.innerHTML = ''
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      latitude = position.coords.latitude
+      longitude = position.coords.longitude
 
-  const registros = await listarHumores()
+      mapa.setView([latitude, longitude], 16)
 
-  registros.forEach(r => {
-    const li = document.createElement('li')
-    li.innerHTML = `
-      ${r.emoji} - ${r.nota} (${r.data})
-      <button data-id="${r.id}">❌</button>
-    `
+      if (marcador) {
+        mapa.removeLayer(marcador)
+      }
 
-    li.querySelector('button').onclick = async () => {
-      await removerHumor(r.id)
-      carregar()
+      marcador = L.marker([latitude, longitude]).addTo(mapa)
+        .bindPopup("Você está aqui 📍")
+        .openPopup()
+    },
+    () => {
+      alert("Não foi possível obter sua localização")
     }
+  )
+})
 
-    lista.appendChild(li)
+
+btnSalvar.addEventListener("click", () => {
+  const humor = humorSelect.value
+  const texto = nota.value
+
+  if (humor === "" || texto === "") {
+    alert("Preencha o humor e a nota")
+    return
+  }
+
+  if (latitude === null || longitude === null) {
+    alert("Clique em 'Salvar localização' primeiro")
+    return
+  }
+
+  const data = new Date().toLocaleString()
+
+  const registro = {
+    humor,
+    texto,
+    data,
+    latitude,
+    longitude
+  }
+
+  salvarRegistro(registro)
+  mostrarRegistro(registro)
+
+  nota.value = ""
+  humorSelect.value = ""
+})
+
+
+function salvarRegistro(registro) {
+  const lista = JSON.parse(localStorage.getItem("diarioHumor")) || []
+  lista.push(registro)
+  localStorage.setItem("diarioHumor", JSON.stringify(lista))
+}
+
+
+function mostrarRegistro(registro) {
+  const div = document.createElement("div")
+  div.classList.add("registro")
+
+  div.innerHTML = `
+    <p><strong>${registro.humor}</strong></p>
+    <p>${registro.texto}</p>
+    <small>${registro.data}</small>
+    <p>📍 ${registro.latitude.toFixed(4)}, ${registro.longitude.toFixed(4)}</p>
+    <hr>
+  `
+
+  registros.prepend(div)
+}
+
+
+function carregarRegistros() {
+  const lista = JSON.parse(localStorage.getItem("diarioHumor")) || []
+
+  lista.reverse().forEach((registro) => {
+    mostrarRegistro(registro)
+
+    if (!marcador) {
+      mapa.setView([registro.latitude, registro.longitude], 12)
+      marcador = L.marker([registro.latitude, registro.longitude]).addTo(mapa)
+    }
   })
 }
 
-carregar()
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js')
-}
+carregarRegistros()

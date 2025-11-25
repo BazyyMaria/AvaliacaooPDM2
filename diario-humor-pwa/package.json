@@ -15,5 +15,10 @@
     "idb": "^8.0.3",
     "leaflet": "^1.9.4",
     "vite-plugin-pwa": "^1.1.0"
-  }
+  },
+  "main": "db.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

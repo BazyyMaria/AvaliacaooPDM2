@@ -2,35 +2,54 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Diário de Humor</title>
 
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="./manifest.webmanifest">
   <link rel="stylesheet" href="./css/style.css" />
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link 
+    rel="stylesheet" 
+    href="https://unpkg.com/leaflet/dist/leaflet.css" 
+  />
 </head>
 <body>
 
   <h1>📔 Diário de Humor</h1>
 
-  <select id="emoji">
-    <option>😀</option>
-    <option>😊</option>
-    <option>😐</option>
-    <option>😢</option>
-    <option>😡</option>
-  </select>
+  <section class="formulario">
 
-  <textarea id="nota" placeholder="Como foi seu dia?"></textarea>
+    <label for="humor">Como você está?</label>
+    <select id="humor">
+      <option value="">Escolha...</option>
+      <option value="😀 Feliz">😀 Feliz</option>
+      <option value="😊 Bem">😊 Bem</option>
+      <option value="😐 Normal">😐 Normal</option>
+      <option value="😢 Triste">😢 Triste</option>
+      <option value="😡 Irritado">😡 Irritado</option>
+    </select>
 
-  <button id="localizacao">📍 Salvar localização</button>
-  <button id="salvar">💾 Salvar entrada</button>
+    <textarea id="nota" placeholder="Como foi seu dia?"></textarea>
 
-  <div id="mapa" style="height:300px"></div>
-  <h2>Registros</h2>
-  <ul id="lista"></ul>
+    <div class="botoes">
+      <button id="localizacao">📍 Capturar localização</button>
+      <button id="salvar">💾 Salvar entrada</button>
+    </div>
+
+  </section>
+
+  <h2>📍 Localização</h2>
+  <div id="mapa" style="height:300px;"></div>
+
+  <h2>📜 Registros</h2>
+  <div id="registros"></div>
+
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script type="module" src="./src/main.js"></script>
+
+ 
+  <script src="./js/main.js" defer></script>
+
 </body>
 </html>
