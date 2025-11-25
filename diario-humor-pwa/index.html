@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Diário de Humor</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+
+  <h1>📔 Diário de Humor</h1>
+
+  <select id="emoji">
+    <option>😀</option>
+    <option>😊</option>
+    <option>😐</option>
+    <option>😢</option>
+    <option>😡</option>
+  </select>
+
+  <textarea id="nota" placeholder="Como foi seu dia?"></textarea>
+
+  <button id="localizacao">📍 Salvar localização</button>
+  <button id="salvar">💾 Salvar entrada</button>
+
+  <div id="mapa" style="height:300px"></div>
+  <h2>Registros</h2>
+  <ul id="lista"></ul>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
