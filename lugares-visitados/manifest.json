@@ -1,6 +1,6 @@
 {
-  "name": "Diário de Humor",
-  "short_name": "Humor",
+  "name": "lugares-visitados",
+  "short_name": "Visitados",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
