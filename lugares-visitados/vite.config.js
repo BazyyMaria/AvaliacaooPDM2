@@ -1,6 +1,7 @@
+import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
-export default {
+export default defineConfig({
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
@@ -13,11 +14,14 @@ export default {
             handler: 'CacheFirst',
             options: {
               cacheName: 'leaflet-lib',
-              expiration: { maxEntries: 50, maxAgeSeconds: 30 * 24 * 60 * 60 }
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 30 * 24 * 60 * 60
+              }
             }
           }
         ]
       }
-    }),
-  ],
-}
+    })
+  ]
+})
