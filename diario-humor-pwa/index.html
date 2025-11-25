@@ -4,11 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Diário de Humor</title>
+  <title>Mapa de Lugares Visitados</title>
 
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="stylesheet" href="./css/style.css" />
-
 
   <link 
     rel="stylesheet" 
@@ -17,27 +16,17 @@
 </head>
 <body>
 
-  <h1>📔 Diário de Humor</h1>
+  <h1>Mapa de lugares visitados</h1>
 
   <section class="formulario">
 
-    <label for="humor">Como você está?</label>
-    <select id="humor">
-      <option value="">Escolha...</option>
-      <option value="😀 Feliz">😀 Feliz</option>
-      <option value="😊 Bem">😊 Bem</option>
-      <option value="😐 Normal">😐 Normal</option>
-      <option value="😢 Triste">😢 Triste</option>
-      <option value="😡 Irritado">😡 Irritado</option>
-    </select>
-
-    <textarea id="nota" placeholder="Fale um pouco mais de como foi seu dia?"></textarea>
+    <label for="descricao">Descrição do lugar:</label>
+    <textarea id="descricao" placeholder="Escreva aqui..."></textarea>
 
     <div class="botoes">
       <button id="localizacao">📍 Capturar localização</button>
-      <button id="salvar">💾 Salvar entrada</button>
+      <button id="salvar">💾 Salvar </button>
       <button id="limpar">🗑️ Excluir todos os registros</button>
-
     </div>
 
   </section>
@@ -48,13 +37,11 @@
   <h2>📜 Registros</h2>
   <div id="registros"></div>
 
+  <div id="mapaOffline" style="display: none; color: red; font-weight: bold;">
+    ⚠️ O mapa não está disponível offline
+  </div>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-  <div id="mapaOffline" style="display: none; color: red; font-weight: bold;">
-  ⚠️ O mapa não está disponível offline
-</div>
- 
   <script src="./js/main.js" defer></script>
 
 </body>
