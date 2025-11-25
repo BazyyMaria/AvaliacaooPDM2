@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #eef1f7;
+}
+
+header {
+  background: #5b7bbc;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+}
+
+main {
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+/* Card do humor */
+.humor-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* Emojis do humor */
+.humores {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.humor-selecionado {
+  transform: scale(1.1);
+  border-bottom: 3px solid #5b7bbc;
+}
+
+/* Campo de texto */
+textarea {
+  width: 100%;
+  resize: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Botão */
+button {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: none;
+  background: #5b7bbc;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}

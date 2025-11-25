@@ -1,5 +1,6 @@
 const btnSalvar = document.getElementById("salvar")
 const btnLocalizacao = document.getElementById("localizacao")
+const btnLimpar = document.getElementById("limpar")
 const nota = document.getElementById("nota")
 const humorSelect = document.getElementById("humor")
 const registros = document.getElementById("registros")
@@ -122,4 +123,14 @@ if ('serviceWorker' in navigator) {
     }
   })
 }
+// Excluir todos os registros
+btnLimpar.addEventListener("click", () => {
+  const confirmar = confirm("Tem certeza que quer apagar todos os registros?")
+  if (confirmar) {
+    localStorage.removeItem("diarioHumor")
+    registros.innerHTML = ""
+    alert("Todos os registros foram apagados!")
+  }
+})
+
 
