@@ -9,12 +9,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vite-plugin-pwa": "^1.1.0"
   },
   "dependencies": {
     "idb": "^8.0.3",
-    "leaflet": "^1.9.4",
-    "vite-plugin-pwa": "^1.1.0"
+    "leaflet": "^1.9.4"
   },
   "main": "db.js",
   "keywords": [],
